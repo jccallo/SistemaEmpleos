@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Listado vaacantes</title>
+
+<!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+
+</head>
+<body>
+	<!-- incluir imagen -->
+	<img th:src="@{/images/logo.png}">
+	
+	<h1 class="text-primary">Lista Vacantes</h1>
+	<table class="table table-striped table-bordered table-hover">
+    <tr>
+    	<th>Logo</th>
+        <th>Id</th>
+        <th>Nombre</th>
+        <th>Fecha</th>
+        <th>Salario</th>
+        <th>Descripcion</th>
+        <th>Destacado (Texto)</th>
+        <th>Destacado (Span)</th>
+    </tr>
+    <tr th:each="vacante: ${vacantes}">
+    	<td>
+    		<img th:src="@{/images/{img}(img=${vacante.imagen})}" width="136" height="136">
+    	</td>
+        <td th:text="${vacante.id}"></td>
+        <td th:text="${vacante.nombre}"></td>
+        <td th:text="${vacante.fecha}"></td>
+        <td th:text="${vacante.salario}"></td>
+        <td th:text="${vacante.descripcion}"></td>
+		<!-- renderizando texto -->
+        <td th:text="${vacante.destacado == 1}? 'Si': 'No'"></td>
+        <!-- renderizando etiqueta -->
+        <td>
+        	<span th:if="${vacante.destacado == 1}" class="badge bg-success">Si</span>
+        	<span th:unless="${vacante.destacado == 1}" class="badge bg-danger">No</span>
+        </td>
+    </tr>
+</table>
+
+ 	<!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+</body>
+</html>
